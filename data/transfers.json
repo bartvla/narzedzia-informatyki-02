@@ -1,0 +1,12 @@
+{
+    "transfer1": {
+        "timestamp": "2026-02-01T12:00:00Z",
+        "amount": 199,
+        "description": "payment for bill1"
+    },
+    "transfer2": {
+        "timestamp": "2026-02-01T12:00:00Z",
+        "amount": 199,
+        "description": "payment for bill2"
+    }
+}
