@@ -1,0 +1,14 @@
+{
+    "bill1": {
+        "amount": 200,
+        "payment_date": "17-02-2026",
+        "bill_type": "rent",
+        "apartment": "apart-polanka"
+    },
+    "bill2": {
+        "amount": 200,
+        "payment_date": "17-02-2026",
+        "bill_type": "rent",
+        "apartment": "apart-polanka"
+    }
+}
