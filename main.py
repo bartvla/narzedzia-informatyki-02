@@ -8,6 +8,7 @@ class Parameters(BaseModel):
     apartments_json_path: str = 'data/apartments.json'
     tenants_json_path: str = 'data/tenants.json'
     bills_json_path: str = 'data/bills.json'
+    transfers_json_path: str = 'data/transfers.json'
 
 
 class Room(BaseModel):
@@ -62,6 +63,7 @@ class Manager:
         self.apartments = Apartment.from_json_file(self.parameters.apartments_json_path)
         self.tenants = Tenant.from_json_file(self.parameters.tenants_json_path)
         self.bills = Bill.from_json_file(self.parameters.bills_json_path)
+        self.transfers = Transfer.from_json_file(self.parameters.transfers_json_path)
 
 class Bill(BaseModel):
     amount: float
@@ -77,6 +79,19 @@ class Bill(BaseModel):
         assert isinstance(data, dict), "Expected a dictionary of billsś"
         return {key: Bill(**bill) for key, bill in data.items()}
 
+class Transfer(BaseModel):
+    timestamp: str
+    amount: float
+    description: str
+
+    @staticmethod
+    def from_json_file(file_path: str) -> Dict[str,'Transfer']:
+        data = None
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        assert isinstance(data, dict), "Expected a dictionary of transfers"
+        return {key: Transfer(**transfer) for key, transfer in data.items()}
+    
 if __name__ == '__main__':
     parameters = Parameters()
     manager = Manager(parameters)
@@ -91,4 +106,6 @@ if __name__ == '__main__':
 
     for bill in manager.bills.values():
         print(bill.amount, bill.payment_date, bill.bill_type, bill.apartment)
-    
+
+    for transfer in manager.transfers.values():
+        print(transfer.timestamp, transfer.amount, transfer.description)
